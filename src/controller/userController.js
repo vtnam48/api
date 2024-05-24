@@ -12,6 +12,17 @@ exports.handleGetAllUser = async (req, res) => {
     }
 }
 
+exports.handleGetUserById = async (req, res) => {
+    try {
+        const uid = req.params.id;
+        user = await userService.getUSer(uid);
+
+        res.status(200).json(user);
+    } catch (error) {
+        return res.status(500).json({ message: "update a user false." });
+    }
+}
+
 exports.handleCreateNewUser = async (req, res) => {
     try {
         let name = req.body.name;

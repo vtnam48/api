@@ -24,12 +24,31 @@ exports.createNewUser = async (data) => {
 
 exports.getAllUser = async () => {
     try {
-        const res = await db.User.findAll({});
+        const res = await db.User.findAll({
+            attributes: ['id', 'name', 'gender', 'university'],
+        });
 
         return res;
     } catch (error) {
         return {
             message: "error"
+        }
+    }
+}
+
+exports.getUser = async (uid) => {
+    try {
+        const res = await db.User.findAll({
+            where: {
+                id: uid
+            },
+            attributes: ['id', 'name', 'gender', 'university']
+        });
+
+        return res;
+    } catch (error) {
+        return {
+            message: error
         }
     }
 }
