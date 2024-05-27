@@ -15,11 +15,14 @@ exports.handleGetAllUser = async (req, res) => {
 exports.handleGetUserById = async (req, res) => {
     try {
         const uid = req.params.id;
-        user = await userService.getUSer(uid);
+        let ret = await userService.getUser(uid);
 
-        res.status(200).json(user);
+        if (!ret) {
+            return res.status(500).json({ message: "get a user false." });
+        } else
+            res.status(200).json(ret);
     } catch (error) {
-        return res.status(500).json({ message: "update a user false." });
+        return res.status(500).json({ message: "get a user false." });
     }
 }
 

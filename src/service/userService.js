@@ -38,7 +38,7 @@ exports.getAllUser = async () => {
 
 exports.getUser = async (uid) => {
     try {
-        const res = await db.User.findAll({
+        const res = await db.User.findOne({
             where: {
                 id: uid
             },
