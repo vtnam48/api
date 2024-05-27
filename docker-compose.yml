@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  db:
+    build:
+      context: ./src/db
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
